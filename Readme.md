@@ -115,3 +115,7 @@ cd ubuntu-xrdp/
 vi docker-compose.override.yml # if you want to override any default value
 docker-compose up -d
 ```
+## To run
+```bash
+sudo docker run -d --name uxrdp --hostname terminalserver --shm-size 16g -p 3389:3389 -p 2222:22 --privileged
+```
