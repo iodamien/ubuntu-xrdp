@@ -2,7 +2,7 @@
 
 test -f /etc/users.list || exit 0
 
-while read id username hash groups; do
+while read id username hash install groups; do
         # Skip, if user already exists
         grep ^$username /etc/passwd && continue
         # Create group
@@ -14,5 +14,8 @@ while read id username hash groups; do
         # Add supplemental groups
         if [ $groups ]; then
                 usermod -aG $groups $username
+        fi
+	if [ $install = "1" ]; then
+                sh /usr/bin/android-sdk.sh $username
         fi
 done < /etc/users.list

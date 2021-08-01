@@ -71,6 +71,8 @@ RUN apt -y full-upgrade && apt install -y \
   xorgxrdp \
   xprintidle \
   xrdp \
+  zip \
+  qemu-system-x86 \
   $ADDITIONAL_PACKAGES && \
   apt-get remove -yy xscreensaver && \
   apt-get autoremove -yy && \
@@ -93,6 +95,12 @@ RUN mkdir /var/run/dbus && \
   cp -r /etc/ssh /ssh_orig && \
   rm -rf /etc/ssh/* && \
   rm -rf /etc/xrdp/rsakeys.ini /etc/xrdp/*.pem
+
+# Android SDK
+RUN apt-get update && apt-get install -y openjdk-8-jdk qemu-system-x86 vim
+WORKDIR /developer
+RUN wget https://redirector.gvt1.com/edgedl/android/studio/ide-zips/2020.3.1.22/android-studio-2020.3.1.22-linux.tar.gz -O android-studio.tar.gz
+#RUN wget https://dl.google.com/android/repository/commandlinetools-linux-7583922_latest.zip -O android-tools.zip
 
 # Docker config
 VOLUME ["/etc/ssh","/home"]
